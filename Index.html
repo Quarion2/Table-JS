@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div id="div1">
+      <input disabled type="text" placeholder="Szukaj....">
+      <button disabled>SZUKAJ</button>
+        <div id="tableContainer">
+        <table id="tabela">
+           <tr>
+                <td>ID</td>
+                <td>IMIÊ</td>
+                <td>KOLOR</td>
+                <td>RASA</td>
+                <td>EDYCJA</td>
+                <td>USUÑ</td>
+            </tr>
+            </div>
+            
+           
+        </table>
+   </div>
+   <div id="div2">
+        <div id="box1">
+           <div>
+            ID :
+            <input type="number" id="idnum" value="0" disabled>
+            </div>
+            <div>
+            IMIÊ :
+            <input type="text" id="name">
+            </div>
+            <div>
+            KOLOR :
+            <input type="text" id="color">
+            </div>
+            <div>
+            RASA :
+            <select id="race">
+                <option value="KOT">KOT</option>
+                <option value="PIES">PIES</option>
+                <option value="LEW">LEW</option>            
+            </select>
+            </div>                
+        </div>
+        <div id="box2">   
+            <button id="confirmButton">ZatwierdŸ</button>
+            <button id="clearButton">Anuluj</button>
+       </div>
+    </div>   
+           
+<script>
+            
+          
+           
+            class animal{
+              constructor(id,name,color,race,sound)
+              {
+                this.id=id;
+                this.name=name;
+                this.color=color;
+                this.race=race;
+                this.sound=sound;
+              }
+              makeSound(){
+                  console.log(this.sound);
+              }
+            }
+            class lion extends animal{
+               constructor(id,name,color,race){
+                   super(id,name,color,race,"ROAARRR");
+                   super.makeSound();
+               }
+               
+            }
+            class cat extends animal{
+               constructor(id,name,color,race){
+                   super(id,name,color,race,"Miau");
+                   super.makeSound();
+                }
+               
+            }
+            class dog extends animal{
+               constructor(id,name,color,race){
+                   super(id,name,color,race,"Hau");
+                   super.makeSound();
+               }
+               
+            }
+            animalArray = new Array;
+            document.getElementById("confirmButton").addEventListener("click",changeId)
+            function changeId ()
+            {
+                var y =parseInt(document.getElementById("idnum").value);
+                document.getElementById("idnum").value = (y = y+1);
+            }
+            document.getElementById("confirmButton").addEventListener("click",function(){
+                var name=document.getElementById("name").value;
+                var color=document.getElementById("color").value;   
+                var race=document.getElementById("race").value;
+                var id=document.getElementById("idnum").value;
+            
+            
+                
+            var wiersz= document.createElement('tr');              
+            document.getElementById('tabela').appendChild(wiersz); 
+            wiersz.id ='newWiersz';
+                
+            var komurkaImie=document.createElement("td");   
+            wiersz.appendChild(komurkaImie);
+            var id1=document.createTextNode(document.getElementById("idnum").value);
+            komurkaImie.appendChild(id1);
+                                                                
+            var komurkaImie=document.createElement("td");   
+            wiersz.appendChild(komurkaImie);   
+            var name1=document.createTextNode(document.getElementById("name").value);
+            komurkaImie.appendChild(name1);
+                
+            var komurkaImie=document.createElement("td");   
+            wiersz.appendChild(komurkaImie);   
+            var color1=document.createTextNode(document.getElementById("color").value);
+            komurkaImie.appendChild(color1);
+                     
+            var komurkaImie=document.createElement("td");   
+            wiersz.appendChild(komurkaImie); 
+            var race1=document.createTextNode(document.getElementById("race").value);
+            komurkaImie.appendChild(race1);
+            
+            var komurkaImie=document.createElement("td");   
+            wiersz.appendChild(komurkaImie);
+            var btn1 = document.createElement("BUTTON");       
+            btn1.id = 'editButton';   
+            komurkaImie.appendChild(btn1)
+            var t = document.createTextNode("Edytuj");       
+            btn1.appendChild(t);                                
+                
+            var komurkaImie=document.createElement("td");   
+            wiersz.appendChild(komurkaImie);
+            var btn1 = document.createElement("BUTTON");    //Create button
+            btn1.id = 'cancelButton'; 
+            komurkaImie.appendChild(btn1)
+            var t = document.createTextNode("Usuñ");       // Create a text node
+            btn1.appendChild(t);                                // Append the text to <button>
+             
+           
+            if (race == "KOT"){var x = new cat(id,name,color,race)}
+            else if (race == "PIES"){var x = new dog(id,name,color,race)}
+            else if(race == "LEW"){var x = new lion(id,name,color,race)};
+            animalArray.push(x);
+                
+            document.getElementById("editButton").addEventListener("click",editFunc);
+            document.getElementById("cancelButton").addEventListener("click",cancelFunc)
+                                    
+            });
+    
+            
+           
+           function editFunc(){
+               var animal = prompt("Imiê zwierzaka:");
+               var animal2 = prompt("Kolor zwierzaka:");
+               var animal3 = prompt("Rasa zwierzaka:");
+               
+               document.getElementById("name").value = animal;
+                document.getElementById("color").value = animal2;   
+                document.getElementById("race").value = animal3;
+                    
+           };
+            
+           function cancelFunc(){
+               var elem = document.getElementById("newWiersz");
+               elem.parentNode.removeChild(elem);
+           };
+          
+            document.getElementById("clearButton").addEventListener("click",function(){ 
+                document.getElementById("name").value = "";
+                document.getElementById("color").value = "";   
+                document.getElementById("race").value = "";
+            });
+           
+           
+           
+        
+        
+       </script>
+       
+   
+    
+</body>
+</html>
